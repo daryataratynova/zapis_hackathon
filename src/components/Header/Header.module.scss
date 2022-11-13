@@ -1,0 +1,27 @@
+.root {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--l-4);
+    margin-bottom: var(--l-4);
+    box-shadow: 0 1px 0 0 var(--c-ring);
+
+    .brand {
+        display: flex;
+        align-items: center;
+        line-height: 24px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: var(--t-font-m);
+        font-weight: bold;
+
+        i {
+            font-style: normal;
+            color: var(--c-primary-500);
+        }
+    }
+}

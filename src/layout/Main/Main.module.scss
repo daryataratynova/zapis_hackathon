@@ -1,0 +1,34 @@
+.root {
+    position: relative;
+    height: 100vh;
+    max-width: 560px;
+    margin: auto;
+    width: 100%;
+
+    .children {
+        padding: 12px 24px;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tabs {
+        padding: 8px 0;
+        box-shadow: 0 -1px 0 0 var(--c-neutral-300);
+    }
+}
+
+.tab {
+    display: flex;
+
+    svg {
+        width: 20px;
+        height: 20px
+    }
+
+    span {
+        font-size: var(--t-font-s);
+    }
+}

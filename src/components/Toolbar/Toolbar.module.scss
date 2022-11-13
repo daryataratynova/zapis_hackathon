@@ -1,0 +1,12 @@
+.root {
+    position: sticky;
+    width: calc(100% + calc(2 * var(--l-6)));
+    top: 0;
+    margin: 0 calc(-1 * var(--l-6));
+    transform: translateY(calc(-1 * var(--l-3)));
+    padding: var(--l-4) var(--l-6);
+    box-shadow: 0 1px 0 0 var(--c-ring), 0 1px 0 1px var(--c-bg);
+    margin-bottom: 10px;
+    background-color: var(--c-bg);
+    z-index: 10;
+}

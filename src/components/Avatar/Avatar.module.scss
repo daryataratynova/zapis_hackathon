@@ -1,0 +1,30 @@
+.root {
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    flex-shrink: 0;
+    overflow: hidden;
+    user-select: none;
+    border-radius: 100%;
+    box-shadow: 0 0 0 1px var(--c-ring);
+
+    &[data-size="small"] {
+        width: 24px;
+        height: 24px;
+        font-size: var(--t-font-s);
+    }
+
+    &[data-size="medium"] {
+        width: 32px;
+        height: 32px;
+        font-size: var(--t-font-m);
+    }
+
+    &[data-size="large"] {
+        width: 48px;
+        height: 48px;
+        font-size: var(--t-font-l);
+    }
+}

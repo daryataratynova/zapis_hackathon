@@ -1,0 +1,28 @@
+.avatar {
+    position: relative;
+    background-color: var(--c-bg);
+
+    .img {
+        display: block;
+        opacity: 0.8;
+    }
+
+    .nails {
+        position: absolute;
+        inset: 0;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 1) 100%);
+    }
+}
+
+.achievements {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px;
+}

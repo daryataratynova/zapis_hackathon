@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Necessary for Next auth
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  xp            Int @default(0)
+  friends       Relationship[]    @relation("friend")
+  friendOf      Relationship[]    @relation("friendOf")
+  accounts      Account[]
+  sessions      Session[]
+  appointments  Appointment[]
+  modifications Modification[]
+  achievements  Achievement[]
+}
+
+enum RelationshipStatus {
+  PENDING
+  ACCEPTED
+}
+
+model Relationship {
+  id            String                @id @default(cuid())
+  userId        String
+  user          User                  @relation("friend", fields: [userId], references: [id], onDelete: Cascade)
+  friendId      String
+  friend        User                  @relation("friendOf", fields: [friendId], references: [id], onDelete: Cascade)
+  status        RelationshipStatus    @default(PENDING)
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+enum AppointmentType {
+  NAILS
+  HAIR
+}
+
+model Appointment {
+  id        String   @id @default(cuid())
+  userId    String
+  date DateTime @default(now())
+  recieved  Boolean  @default(false)
+  type      AppointmentType
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Modification {
+  id        String    @id @default(cuid())
+  userId    String
+  date      DateTime  @default(now())
+  color     String    @default("#000000")
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Achievement {
+  id        String    @id @default(cuid())
+  userId    String
+  date      DateTime  @default(now())
+  name      String
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
